@@ -33,8 +33,7 @@ function SendDanmaku()
 			url: '/api/post_comment',
 			data: dm_data,
 			dataType: 'text',
-			success: function(data) { 
-				var result = data.result;
+			success: function(result) {				
 				if(result == "OK") {
 					$(".result_text").css("color", "#390");
 				}
