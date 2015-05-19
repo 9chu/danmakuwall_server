@@ -123,6 +123,19 @@ else {
     };
     
     var sendComment = function (response) {
+        var now = Date.now() / 1000;
+        
+        // 清理过期的弹幕
+        while (commentQueue.length > 0) {
+            if (now - commentQueue[0].time > config.commentCacheMaxTime)
+                commentQueue.shift();
+            else
+                break;
+        }
+        
+        if (commentQueue.length === 0)
+            return false;
+            
         var data = JSON.stringify(commentQueue);
         commentQueue.splice(0, commentQueue.length);
         response.writeHead(200, {
@@ -130,6 +143,7 @@ else {
         });
         response.write(data);
         response.end();
+        return true;
     };
     
     var handleWaitQueue = function () {
@@ -222,10 +236,8 @@ else {
                     }
                     else {
                         // 若有缓存的弹幕，则立即发送
-                        if (commentQueue.length > 0) {
-                            sendComment(response);
+                        if (commentQueue.length > 0 && sendComment(response))
                             console.log("[" + requestTime + "] 响应 IP: " + remoteAddr + " " + request.method + " " + requestPath + " <- 200");
-                        }
                         else {
                             // 打包缓存
                             var req = { timeout: false, response: response, remoteAddr: remoteAddr, timeoutHandle: null };
