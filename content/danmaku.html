@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>弹幕墙</title>
+<link rel="stylesheet" href="css/colorPicker.css" type="text/css" />
+<style type="text/css">
+<!--
+#bg { position: fixed; top: 0; left: 0; z-index: -10; }
+.bgwidth { width: 100%; }
+.bgheight { height: 100%; }
+
+.main_container {
+	text-align: center;
+	padding-top: 60px;
+}
+.main_container .header_title {
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+.main_container .container {
+	background-color: #FFF;
+	border: 1px solid #000;
+	border-radius: 4px;
+	width: 410px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+h1 {
+	font-family: Arial, "微软雅黑", "黑体";
+	font-size: 28px;
+	font-weight: bold;
+	color: #000;
+}
+.main_container .container .main_table {
+	text-align: center;
+}
+.label_text {
+	font-family: Arial, "幼圆";
+	font-size: 16px;
+}
+.hint_text {
+	font-family: Arial, "楷体";
+	font-size: 14px;
+}
+.result_text {
+	font-family: Arial, "楷体";
+	font-size: 14px;
+	color: #390;
+	text-align: right;
+}
+-->
+</style>
+</head>
+<script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.json-2.4.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.colorPicker.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/danmaku.js"></script>
+<script type="text/javascript">
+	function bindBackgroundResizeEvent() {    
+		var theWindow = $(window),
+		$bg = $("#bg"),
+		aspectRatio = $bg.width() / $bg.height();
+		function resizeBg() {
+			if ((theWindow.width() / theWindow.height()) < aspectRatio ) {
+				$bg
+				.removeClass()
+				.addClass('bgheight');
+			} else {
+				$bg
+				.removeClass()
+				.addClass('bgwidth');
+			}
+		}
+		theWindow.resize(resizeBg).trigger("resize");
+	}
+
+	$(function() {
+		bindBackgroundResizeEvent();
+		
+		$('#dm_color').colorPicker();  // 初始化颜色拾取器
+		
+		// 绑定回车发送弹幕
+		$('#dm_content').bind('keypress', function(event) {
+            if(event.keyCode == "13")    
+            {
+            	SendDanmaku();
+            }
+        });
+	})
+</script>
+<body>
+<img src="images/back2.jpg" id="bg" alt="">
+<div class="main_container">
+    <div class="header_title">
+        <h1>弹幕墙</h1>
+    </div>
+    <div class="container">
+        <table width="400" border="0" class="main_table">
+            <tr>
+                <td colspan="8"><input name="dm_content" type="text" id="dm_content" style="width: 100%;" /></td>
+            </tr>
+                <tr>
+                <td width="10" />
+                <td width="32" class="label_text">样式</td>
+                <td width="85">
+                    <select name="dm_style" id="dm_style">
+                        <option>普通弹幕</option>
+                        <option>顶端弹幕</option>
+                        <option>底端弹幕</option>
+                    </select>
+                </td>
+                <td width="32" class="label_text">字号</td>
+                <td width="58">
+                    <select name="dm_size" id="dm_size">
+                        <option>小</option>
+                        <option>较小</option>
+                        <option>普通</option>
+                        <option>较大</option>
+                        <option>大</option>
+                    </select>
+                </td>
+                <td width="32" class="label_text">颜色</td>
+                <td width="20"><input name="dm_color" id="dm_color" type="text" value="#FFFFFF" /></td>
+                <td><a href="javascript:SendDanmaku();"><img src="images/send.png" alt="发射弹幕" title="biu!" border="0" /></a></td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    <table border="0" width="100%">
+                        <tr>
+                            <td class="hint_text" width="150">●&nbsp;请遵守基本弹幕礼仪</td>
+                            <td class="result_text" id="dm_result"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

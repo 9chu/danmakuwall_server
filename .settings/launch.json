@@ -1,0 +1,15 @@
+{
+	"version": "0.1.0",
+	"configurations": [
+		{
+			"name": "start debug",
+			"type": "node",
+			"program": "server.js",
+			"stopOnEntry": false,
+			"args": [],
+			"cwd": ".",
+			"runtimeExecutable": null,
+			"env": { }
+		}
+	]
+}

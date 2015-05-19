@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>弹幕吐槽用户规范</title>
+<style type="text/css">
+<!--
+#bg { position: fixed; top: 0; left: 0; z-index: -10; }
+.bgwidth { width: 100%; }
+.bgheight { height: 100%; }
+
+.main_container {
+	text-align:center;
+	padding-top: 30px;
+}
+.container .title_text {
+	font-family: Arial, "微软雅黑", "黑体";
+	font-size: 25px;
+	color: #000;
+	text-align: center;
+	font-weight: normal;
+	height: 40px;
+}
+.container .text_border {
+	background-color: #FFF;
+}
+.container .text_container {
+	width: 320px;
+	overflow: auto;
+	margin-left: auto;
+	margin-right: auto;
+	height: 180px;
+}
+.container .text_container .text_header {
+	font-family: Arial, "微软雅黑", "黑体";
+	font-size: 15px;
+}
+.container .text_container .text_tail {
+	font-size: 15px;
+	font-family: Arial, "微软雅黑", "黑体";
+}
+.container .text_container .text_content {
+	font-size: 15px;
+	font-family: Arial, "楷体";
+	text-align: left;
+	width: 280px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.container {
+	background-color: #FC0;
+	padding: 5px;
+	border: 1px solid #000;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+-->
+</style>
+<script language="javascript" type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {    
+   var theWindow   = $(window),
+       $bg         = $("#bg"),
+       aspectRatio = $bg.width() / $bg.height();
+   function resizeBg() {
+	if ((theWindow.width() / theWindow.height()) < aspectRatio ) {
+		$bg
+		   .removeClass()
+		   .addClass('bgheight');
+	} else {
+		$bg
+		   .removeClass()
+		   .addClass('bgwidth');
+	}
+   }
+   theWindow.resize(resizeBg).trigger("resize");
+});
+</script>
+</head>
+<body>
+<img src="images/back1.jpg" id="bg" alt="">
+<div class="main_container">
+  <div class="container">
+    <div class="title_text">弹幕吐槽基本礼仪</div>
+    <div class="text_border">
+  	  <div class="text_container">
+        <p class="text_header">使用弹幕墙要求您必须遵循以下规范：</p>
+        <div class="text_content">1、禁止干扰放映会、专题活动正常秩序；<br/>
+        2、禁止在评论中进行人身攻击；<br/>
+        3、禁止发表违反法律法规的言论；<br/>
+        4、禁止就有争端的话题进行辩论。</div>
+        <p class="text_tail">活动最终解释权归主办方所有。</p>
+  	  </div>
+      <a href="danmaku.html"><img src="images/start.png" alt="开始吐槽" border="0" /></a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

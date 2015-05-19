@@ -1,0 +1,11 @@
+{
+	"port": 8159,
+	"webroot": "content",
+	"index": "index.html",
+	"commentPostApiUrl": "/api/post_comment",
+	"commentFetchApiUrl": "/api/fetch_comment",
+	"commentFetchAuthKey": "password",
+	"commentFetchTimeout": 60,
+	"commentCacheMaxTime": 10,
+	"commentMaxLength": 20
+}
