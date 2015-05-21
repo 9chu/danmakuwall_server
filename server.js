@@ -103,7 +103,7 @@ else {
         data["type"] = parseInt(param["type"]);
         
         // 检查参数合法性
-        if (data["size"] < 0 || data["size"] > 5 || data["color"][0] < 0 || data["color"][0] > 255 || 
+        if (data["size"] < 0 || data["size"] > 4 || data["color"][0] < 0 || data["color"][0] > 255 || 
             data["color"][1] < 0 || data["color"][1] > 255 || data["color"][2] < 0 || data["color"][2] > 255 ||
             data["type"] < 0 || data["type"] > 2)
             return false;
