@@ -169,6 +169,17 @@ else {
         }
     };
     
+    var clearTimeoutQueueElement = function () {
+        if (waitQueue.length > 50) {
+            var newQueue = [];
+            for (var i = 0; i < waitQueue.length; ++i) {
+                if (!waitQueue[i].timeout)
+                    newQueue.push(waitQueue[i]);
+            }
+            waitQueue = newQueue;
+        }
+    };
+    
     // 初始化服务端
     var server = http.createServer(function (request, response) {
         var requestTime = new Date().format("yyyy-MM-dd hh:mm:ss");
@@ -250,6 +261,8 @@ else {
                                 response.end();
                                 console.log("[" + requestTime + "] 长轮询响应(已超时) IP: " + remoteAddr + " <- 200");
                                 clearTimeout(req.timeoutHandle);
+                                
+                                clearTimeoutQueueElement();
                             }, config.commentFetchTimeout * 1000);
                             waitQueue.push(req);
                         }
