@@ -68,7 +68,7 @@ function response500(response, requestPath) {
 
 // 载入配置
 console.log("正在读取配置...");
-var config = JSON.parse(fs.readFileSync("config.json", { encoding: "utf8" }));
+var config = JSON.parse(fs.readFileSync("config.json", "utf-8"));
 if (typeof(config.webroot) !== "string" || !fs.existsSync(config.webroot))
     console.error("webroot文件夹不存在或无效!");
 else {
