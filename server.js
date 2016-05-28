@@ -69,6 +69,22 @@ function response500(response, requestPath) {
 // 载入配置
 console.log("正在读取配置...");
 var config = JSON.parse(fs.readFileSync("config.json", "utf-8"));
+
+// 黑名单列表
+console.log("正在读取黑名单...");
+if (!fs.existsSync('blacklist.txt')) {
+    console.log('未识别到黑名单...');
+}
+else {
+    console.log('正在载入黑名单...');
+    var blacklist = fs.readFileSync('blacklist.txt', 'utf-8').split('\n').filter(function(value) {
+        if (value !== '' && value[0] !== '!') {
+            return value;
+        }
+    });
+}
+
+
 if (typeof(config.webroot) !== "string" || !fs.existsSync(config.webroot))
     console.error("webroot文件夹不存在或无效!");
 else {
@@ -107,6 +123,14 @@ else {
             data["color"][1] < 0 || data["color"][1] > 255 || data["color"][2] < 0 || data["color"][2] > 255 ||
             data["type"] < 0 || data["type"] > 2)
             return false;
+
+        // 检查是否在黑名单列表
+        if (!blacklist.every(function(value) {
+                return data.comment.indexOf(value) === -1;
+            })) {
+            console.log('评论"' + data.comment + '"已被黑名单屏蔽!');
+            return true;
+        }
         
         // 递交到队列前清理过期的弹幕
         while (commentQueue.length > 0) {
