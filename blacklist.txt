@@ -1,0 +1,4 @@
+! This is an annotate.Words written below will be ignored by Danmu system.
+
+fuck
+shit
